@@ -48,7 +48,10 @@
   display: block;
   border-radius: 0.3rem;
 }
-
+.image-item.selected {
+  outline: 3px solid #0077ff;
+  outline-offset: 2px;
+}
         .image-item.drag-over {
           border-color: #0077ff;
           background: #e7f0ff;
@@ -132,7 +135,7 @@
     const clueElement = document.getElementById("clue");
     const checkButtonElement = document.getElementById("check-button");
 
-    let dragSourceElement = null;
+    let selectedItemElement = null;
 
     function shuffleImages() {
       const imageItemElements = Array.from(document.querySelectorAll(".image-item"));
@@ -147,46 +150,40 @@
       });
     }
 
-    function handleDragStart(event) {
-      dragSourceElement = event.currentTarget;
-      event.dataTransfer.effectAllowed = "move";
+    function swapItems(firstItemElement, secondItemElement) {
+      const parentElement = imageListElement;
+      const placeholderElement = document.createElement("div");
+
+      parentElement.insertBefore(placeholderElement, firstItemElement);
+      parentElement.insertBefore(firstItemElement, secondItemElement);
+      parentElement.insertBefore(secondItemElement, placeholderElement);
+      parentElement.removeChild(placeholderElement);
     }
 
-    function handleDragOver(event) {
-      event.preventDefault();
-      const targetElement = event.currentTarget;
-      targetElement.classList.add("drag-over");
-    }
+    function handleItemClick(event) {
+      const clickedItemElement = event.currentTarget;
 
-    function handleDragLeave(event) {
-      const targetElement = event.currentTarget;
-      targetElement.classList.remove("drag-over");
-    }
-
-    function handleDrop(event) {
-      event.preventDefault();
-      const targetElement = event.currentTarget;
-      targetElement.classList.remove("drag-over");
-      if (dragSourceElement === targetElement) {
+      if (selectedItemElement === null) {
+        selectedItemElement = clickedItemElement;
+        selectedItemElement.classList.add("selected");
         return;
       }
-      const boundingRectangle = targetElement.getBoundingClientRect();
-      const offsetFromTop = event.clientY - boundingRectangle.top;
-      const shouldInsertBefore = offsetFromTop < boundingRectangle.height / 2;
-      if (shouldInsertBefore) {
-        imageListElement.insertBefore(dragSourceElement, targetElement);
-      } else {
-        imageListElement.insertBefore(dragSourceElement, targetElement.nextSibling);
+
+      if (selectedItemElement === clickedItemElement) {
+        selectedItemElement.classList.remove("selected");
+        selectedItemElement = null;
+        return;
       }
+
+      swapItems(selectedItemElement, clickedItemElement);
+      selectedItemElement.classList.remove("selected");
+      selectedItemElement = null;
     }
 
-    function setUpDragAndDrop() {
+    function setUpInteraction() {
       const imageItemElements = document.querySelectorAll(".image-item");
       imageItemElements.forEach(function (imageItemElement) {
-        imageItemElement.addEventListener("dragstart", handleDragStart);
-        imageItemElement.addEventListener("dragover", handleDragOver);
-        imageItemElement.addEventListener("dragleave", handleDragLeave);
-        imageItemElement.addEventListener("drop", handleDrop);
+        imageItemElement.addEventListener("click", handleItemClick);
       });
     }
 
@@ -214,7 +211,7 @@
     }
 
     shuffleImages();
-    setUpDragAndDrop();
+    setUpInteraction();
     checkButtonElement.addEventListener("click", checkOrder);
 </script>
 </body>
