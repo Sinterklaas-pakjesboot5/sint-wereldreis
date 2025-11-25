@@ -33,18 +33,18 @@
   cursor: grab;
   border-radius: 0.5rem;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
-  flex: 0 0 calc(50% - 0.75rem); /* twee naast elkaar */
+  flex: 0 0 calc(50% - 0.75rem);  /* twee naast elkaar */
   box-sizing: border-box;
   display: flex;
   justify-content: center;
+  align-items: center;
   aspect-ratio: 10 / 9;
 }
 
 .image-item img {
   width: 100%;
-  height: auto;
-  max-height: 100%;
-  object-fit: contain;
+  height: 100%;
+  object-fit: contain;             /* niets afknippen */
   display: block;
   border-radius: 0.3rem;
 }
@@ -76,6 +76,7 @@
           background: #fff6d5;
           border: 1px solid #e0c570;
         }
+
     </style>
 </head>
 <body>
