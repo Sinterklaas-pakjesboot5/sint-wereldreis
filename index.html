@@ -12,50 +12,51 @@
           padding: 0 1rem 3rem;
           line-height: 1.5;
         }
+
         h1 {
           font-size: 1.7rem;
           margin-bottom: 0.5rem;
         }
+
         p {
           margin: 0.2rem 0;
         }
+
         .image-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  margin: 1.2rem 0;
-}
-
-.image-item {
-  border: 2px solid #ccc;
-  padding: 0.35rem;
-  background: #f7f7f7;
-  cursor: grab;
-  border-radius: 0.5rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
-  flex: 0 0 calc(50% - 0.75rem);  /* twee naast elkaar */
-  box-sizing: border-box;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  aspect-ratio: 10 / 9;
-}
-
-.image-item img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;             /* niets afknippen */
-  display: block;
-  border-radius: 0.3rem;
-}
-.image-item.selected {
-  outline: 3px solid #0077ff;
-  outline-offset: 2px;
-}
-        .image-item.drag-over {
-          border-color: #0077ff;
-          background: #e7f0ff;
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.75rem;
+          margin: 1.2rem 0;
         }
+
+        .image-item {
+          border: 2px solid #ccc;
+          padding: 0.35rem;
+          background: #f7f7f7;
+          cursor: pointer;
+          border-radius: 0.5rem;
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+          flex: 0 0 calc(50% - 0.75rem);
+          box-sizing: border-box;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          aspect-ratio: 10 / 9;
+        }
+
+        .image-item img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+          display: block;
+          border-radius: 0.3rem;
+        }
+
+        .image-item.selected {
+          outline: 3px solid #0077ff;
+          outline-offset: 2px;
+        }
+
         #check-button {
           padding: 0.55rem 1.2rem;
           font-size: 1rem;
@@ -64,14 +65,17 @@
           background: #ffffff;
           cursor: pointer;
         }
+
         #check-button:hover {
           background: #f0f0f0;
         }
+
         #result-message {
           margin-top: 0.75rem;
           font-weight: bold;
           min-height: 1.3em;
         }
+
         #clue {
           margin-top: 1.5rem;
           padding: 1rem 1.2rem;
@@ -79,34 +83,33 @@
           background: #fff6d5;
           border: 1px solid #e0c570;
         }
-
     </style>
 </head>
 <body>
 <h1>Orden de reis van de Sint</h1>
-<p>Sleep de kaartjes in de juiste volgorde en klik daarna op <strong>Check</strong>.</p>
-<p>Pas als alles klopt, onthult Sint een belangrijke hint…</p>
+<p>Klik twee kaartjes om ze te verwisselen en zet zo de reis in de juiste volgorde.</p>
+<p>Als alles klopt, onthult Sint een belangrijke hint…</p>
 
 <div id="image-list" class="image-list">
-    <div class="image-item" draggable="true" data-id="new_zealand">
+    <div class="image-item" data-id="new_zealand">
         <img src="images/new_zealand.jpg" alt="Nieuw-Zeeland">
     </div>
-    <div class="image-item" draggable="true" data-id="japan">
+    <div class="image-item" data-id="japan">
         <img src="images/japan.jpg" alt="Japan">
     </div>
-    <div class="image-item" draggable="true" data-id="san_francisco">
+    <div class="image-item" data-id="san_francisco">
         <img src="images/san_francisco.jpg" alt="San Francisco">
     </div>
-    <div class="image-item" draggable="true" data-id="panama">
+    <div class="image-item" data-id="panama">
         <img src="images/panama.jpg" alt="Panama">
     </div>
-    <div class="image-item" draggable="true" data-id="lapland">
+    <div class="image-item" data-id="lapland">
         <img src="images/lapland.jpg" alt="Lapland">
     </div>
-    <div class="image-item" draggable="true" data-id="istanbul">
+    <div class="image-item" data-id="istanbul">
         <img src="images/istanbul.jpg" alt="Istanbul">
     </div>
-    <div class="image-item" draggable="true" data-id="scotland">
+    <div class="image-item" data-id="scotland">
         <img src="images/scotland.jpg" alt="Schotland">
     </div>
 </div>
